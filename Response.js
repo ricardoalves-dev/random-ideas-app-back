@@ -10,9 +10,8 @@ class Response{
   }
 
   set data(data){
-    console.log(data);
     this.#data = data;
-    Array.isArray(data) ? this.#total = data.length : 1;
+    this.#total = Array.isArray(data) ? data.length : 1;
   }
 
   get data(){
