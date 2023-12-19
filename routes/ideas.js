@@ -25,7 +25,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body.autor);
   const idea = {
     id: data[data.length - 1].id + 1,
     autor: req.body.autor,
@@ -36,6 +35,18 @@ router.post('/', (req, res) => {
   const response = new Response();
   response.data = idea;
   return res.status(HttpStatus.OK).json(response.toJson());
+});
+
+router.delete('/:id', (req, res) => {
+  const response = new Response();
+  for (let i = 0; i < data.length; i++) {
+    if(data[i].id === parseInt(req.params.id)){
+      data.splice(i, 1);
+      return res.status(HttpStatus.OK).json(response.toJson());
+    }    
+  }
+  
+  return res.status(HttpStatus.NOT_FOUND).json(response.toJson());  
 });
 
 module.exports = router;
