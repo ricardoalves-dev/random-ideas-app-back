@@ -24,4 +24,18 @@ router.get('/:id', (req, res) => {
   }
 });
 
+router.post('/', (req, res) => {
+  console.log(req.body.autor);
+  const idea = {
+    id: data[data.length - 1].id + 1,
+    autor: req.body.autor,
+    descricao: req.body.descricao,
+  };
+
+  data.push(idea);
+  const response = new Response();
+  response.data = idea;
+  return res.status(HttpStatus.OK).json(response.toJson());
+});
+
 module.exports = router;
