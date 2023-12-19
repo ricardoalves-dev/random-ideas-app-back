@@ -16,7 +16,6 @@ router.get('/:id', (req, res) => {
 
   if(dado.length > 0){
     response.data = dado[0];
-    console.log(response.data);
     return res.status(HttpStatus.OK).json(response.toJson());
   }
   else{
@@ -47,6 +46,20 @@ router.delete('/:id', (req, res) => {
   }
   
   return res.status(HttpStatus.NOT_FOUND).json(response.toJson());  
+});
+
+router.put('/:id', (req, res) => {
+  const response = new Response();
+  const index = data.findIndex(d => d.id === parseInt(req.params.id));
+
+  if(index >= 0){
+    data[index].autor = req.body.autor;
+    data[index].descricao = req.body.descricao;
+    response.data = data[index];
+    return res.status(HttpStatus.OK).json(response.toJson());
+  }
+
+  return res.status(HttpStatus.NOT_FOUND).json(response.toJson());
 });
 
 module.exports = router;
